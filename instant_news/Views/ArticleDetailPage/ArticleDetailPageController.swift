@@ -136,6 +136,8 @@ class ArticleDetailPageController: UIViewController {
 
         contentTextView.text = article?.cleanedContent()
 
+        shareButton.addTarget(self, action: #selector(shareLink), for: .touchUpInside)
+
         openOnWeb.addTarget(self, action: #selector(openLink), for: .touchUpInside)
 
         view.addSubview(headerImage)
@@ -164,7 +166,7 @@ class ArticleDetailPageController: UIViewController {
 
             // add constraints to shareButton
             shareButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            shareButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: -30),
+            shareButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
 
             // add constraints to infoLabel
             infoLabel.leadingAnchor.constraint(equalTo: headerImage.leadingAnchor, constant: 20),
@@ -206,6 +208,29 @@ class ArticleDetailPageController: UIViewController {
     @objc func openLink(sender: UIButton!) {
         if let url = URL(string: article?.url ?? "") {
             UIApplication.shared.open(url)
+        }
+    }
+
+    @objc func shareLink(sender: UIButton!) {
+        Task {
+            let firstActivityItem = article?.title ?? ""
+            let secondActivityItem: NSURL = NSURL(string: article?.url ?? "")!
+
+            let activityViewController: UIActivityViewController = UIActivityViewController(
+                    activityItems: [firstActivityItem, secondActivityItem], applicationActivities: nil)
+
+            activityViewController.activityItemsConfiguration = [
+                UIActivity.ActivityType.message
+            ] as? UIActivityItemsConfigurationReading
+
+            activityViewController.excludedActivityTypes = [
+                UIActivity.ActivityType.print,
+                UIActivity.ActivityType.assignToContact,
+                UIActivity.ActivityType.saveToCameraRoll,
+            ]
+
+            activityViewController.isModalInPresentation = true
+            present(activityViewController, animated: true, completion: nil)
         }
     }
 

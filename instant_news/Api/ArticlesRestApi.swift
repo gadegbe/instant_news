@@ -6,9 +6,11 @@ import Foundation
 
 class ArticlesRestApi: NSObject {
 
-    func fetchArticles(completion: @escaping ([Article]) -> ()) {
-        var sourcesURL = URL(string: "https://newsapi.org/v2/top-headlines?language=\(Config.language)")!
-//        var sourcesURL = URL(string: "https://newsapi.org/v2/everything?q=bitcoin&language=\(Config.language)")!
+    func fetchArticles(query: String?, sortBy: String, completion: @escaping ([Article]) -> ()) {
+        var sourcesURL = URL(string: "https://newsapi.org/v2/top-headlines?language=\(Config.language)&sortBy=\(sortBy)")!
+        if (query != nil && !query!.isEmpty) {
+            sourcesURL = URL(string: "https://newsapi.org/v2/everything?q=\(query!)&language=\(Config.language)&sortBy=\(sortBy)")!
+        }
 
         var request = URLRequest(url: sourcesURL)
         request.addValue(Config.apiKey, forHTTPHeaderField: "Authorization")
@@ -16,8 +18,8 @@ class ArticlesRestApi: NSObject {
                     if let data = data {
                         let decoder = JSONDecoder()
                         decoder.dateDecodingStrategy = .iso8601
-                        let result = try! decoder.decode(Result.self, from: data)
-                        completion(result.articles)
+                        let result = try? decoder.decode(Result.self, from: data)
+                        completion(result?.articles ?? [Article]())
                     }
                 }
                 .resume()

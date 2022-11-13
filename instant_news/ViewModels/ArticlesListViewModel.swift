@@ -7,9 +7,22 @@ import UIKit
 class ArticlesListViewModel: NSObject {
 
     private var newsApi: ArticlesRestApi!
+
     private(set) var articles: [Article]! {
         didSet {
             reloadContent()
+        }
+    }
+
+    var selectOrder: SortBy = SortBy.sorts.first! {
+        didSet {
+            fetchArticles()
+        }
+    }
+
+    var query: String? {
+        didSet {
+            fetchArticles()
         }
     }
 
@@ -23,8 +36,8 @@ class ArticlesListViewModel: NSObject {
     }
 
     func fetchArticles() {
-        newsApi.fetchArticles { (articles) in
+        newsApi.fetchArticles(query: query, sortBy: selectOrder.value, completion: { (articles) in
             self.articles = articles
-        }
+        })
     }
 }

@@ -28,15 +28,19 @@ struct Article: Hashable, Codable {
 
 // Replace the hour (time) of both dates with 00:00
         let date1 = calendar.startOfDay(for: publishedAt!)
-        let date2 = calendar.startOfDay(for: Date())
+        let date2 = Date()
 
-        let components = calendar.dateComponents([.minute, .hour, .day], from: date1, to: date2)
-        if components.minute != nil && components.minute! > 0 && components.minute! < 60 {
-            return "Il y a \(components.minute!) minutes"
-        } else if components.hour != nil && components.hour! > 0 && components.hour! < 24 {
-            return "Il y a \(components.hour!) heures"
-        } else if components.day != nil && components.day! > 0 && components.day! < 7 {
-            return "Il y a \(components.day!) jours"
+        let component = calendar.dateComponents([.minute, .hour, .day], from: date1, to: date2)
+        let day = component.day
+        let hour = component.hour
+        let minute = component.minute
+
+        if minute != nil && minute! > 0 && minute! < 60 {
+            return "Il y a \(minute!) minute\(minute! > 1 ? "s" : "")"
+        } else if hour != nil && hour! > 0 && hour! < 24 {
+            return "Il y a \(hour!) heure\(minute! > 1 ? "s" : "")"
+        } else if day != nil && day! > 0 && day! < 7 {
+            return "Il y a \(day!) jour\(minute! > 1 ? "s" : "")"
         }
         return dateFormatter.string(from: publishedAt!)
     }
@@ -49,8 +53,6 @@ struct Article: Hashable, Codable {
             return trimmedString
         }
         return content
-//        let trimmedString = string.replacingOccurrences(of: "\\s?\\[[\\w\\s]*\\]", with: "", options: .regularExpression)
-//        return trimmedString
     }
 }
 

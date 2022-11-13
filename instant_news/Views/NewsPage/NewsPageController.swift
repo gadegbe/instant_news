@@ -19,7 +19,7 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
     }()
 
     lazy var sortByModal = {
-        SortByModal()
+        SortByModal(vm: articlesViewModel)
     }()
 
     let articlesListView = {
@@ -32,7 +32,7 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
     let searchBar = {
         let bar = UISearchBar()
         bar.searchBarStyle = UISearchBar.Style.prominent
-        bar.placeholder = " Search..."
+        bar.placeholder = " Rechercher..."
         bar.sizeToFit()
         bar.isTranslucent = false
         bar.backgroundImage = UIImage()
@@ -59,6 +59,16 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
         return label
     }()
 
+    let emptyImage = {
+        let image = UIImage(named: "server-down")
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    var debounce_search: Timer?
+
     override func loadView() {
         view = UIView(frame: .zero)
         initialize()
@@ -67,12 +77,14 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
 
     private func configure() {
         navigationController?.navigationBar.barStyle = .default
-        
+
         view.backgroundColor = .systemBackground
+
         view.addSubview(newsTitle)
-        view.addSubview(sortByButton)
         view.addSubview(searchBar)
+        view.addSubview(sortByButton)
         view.addSubview(articlesListView)
+        view.addSubview(emptyImage)
 
         NSLayoutConstraint.activate([
             // add constraints to the newsTitle
@@ -92,7 +104,13 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
             articlesListView.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor),
             articlesListView.trailingAnchor.constraint(equalTo: searchBar.trailingAnchor),
             articlesListView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-            articlesListView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            articlesListView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            // add constraints to the articlesListView
+            emptyImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyImage.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            emptyImage.heightAnchor.constraint(equalTo: emptyImage.widthAnchor),
         ])
     }
 
@@ -104,6 +122,8 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
 
         articlesViewModel.reloadContent = { [self] in
             Task {
+                articlesListView.isHidden = articlesViewModel.articles!.isEmpty
+                emptyImage.isHidden = !articlesListView.isHidden
                 articlesListView.reloadData()
             }
         }
@@ -112,7 +132,10 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String) {
-        //your code here....
+        debounce_search?.invalidate()
+        debounce_search = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [self] _ in
+            articlesViewModel.query = textSearched
+        }
     }
 
     @objc func sortByPressed(sender: UIButton!) {
