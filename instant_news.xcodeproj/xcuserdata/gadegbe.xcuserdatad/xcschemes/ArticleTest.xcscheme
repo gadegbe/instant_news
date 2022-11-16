@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6BEFB2B9291D794900B50F1E"
+               BuildableName = "instant_newsTests.xctest"
+               BlueprintName = "instant_newsTests"
+               ReferencedContainer = "container:instant_news.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug">
+      <Testables>
+         <TestableReference>
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6BEFB2B9291D794900B50F1E"
+               BuildableName = "instant_newsTests.xctest"
+               BlueprintName = "instant_newsTests"
+               ReferencedContainer = "container:instant_news.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      allowLocationSimulation = "YES">
+   </LaunchAction>
+</Scheme>

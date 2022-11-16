@@ -5,9 +5,9 @@
 import UIKit
 
 class SortByModal: UIAlertController {
-    private var vm: ArticlesListViewModel?
+    private var vm: ArticlesListViewModel<ArticlesRestApi>?
 
-    init(vm: ArticlesListViewModel) {
+    init(vm: ArticlesListViewModel<ArticlesRestApi>) {
         super.init(nibName: nil, bundle: nil)
         self.vm = vm
     }

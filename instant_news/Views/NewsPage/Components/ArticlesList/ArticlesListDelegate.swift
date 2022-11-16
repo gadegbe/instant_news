@@ -7,10 +7,10 @@ import UIKit
 class ArticlesListDelegate: NSObject, UITableViewDelegate {
 
     var navigationController: UINavigationController?
-    private let vm: ArticlesListViewModel
+    private let vm: ArticlesListViewModel<ArticlesRestApi>
 
 
-    init(navigationController: UINavigationController?, vm: ArticlesListViewModel) {
+    init(navigationController: UINavigationController?, vm: ArticlesListViewModel<ArticlesRestApi>) {
         self.navigationController = navigationController
         self.vm = vm
         super.init()

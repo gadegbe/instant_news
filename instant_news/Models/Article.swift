@@ -27,20 +27,22 @@ struct Article: Hashable, Codable {
         let calendar = NSCalendar.current
 
 // Replace the hour (time) of both dates with 00:00
-        let date1 = calendar.startOfDay(for: publishedAt!)
+        let date1 = publishedAt!
         let date2 = Date()
 
         let component = calendar.dateComponents([.minute, .hour, .day], from: date1, to: date2)
-        let day = component.day
-        let hour = component.hour
-        let minute = component.minute
+        let day = abs(component.day ?? 0)
+        let hour = abs(component.hour ?? 0)
+        let minute = abs(component.minute ?? 0)
 
-        if minute != nil && minute! > 0 && minute! < 60 {
-            return "Il y a \(minute!) minute\(minute! > 1 ? "s" : "")"
-        } else if hour != nil && hour! > 0 && hour! < 24 {
-            return "Il y a \(hour!) heure\(minute! > 1 ? "s" : "")"
-        } else if day != nil && day! > 0 && day! < 7 {
-            return "Il y a \(day!) jour\(minute! > 1 ? "s" : "")"
+        if (component.minute != nil && minute == 0 && component.minute != nil && minute == 0 && component.day != nil && day == 0) {
+            return "Maintenant"
+        } else if day > 0 && day < 7 {
+            return "Il y a \(day) jour\(day > 1 ? "s" : "")"
+        } else if hour > 0 && hour < 24 {
+            return "Il y a \(hour) heure\(hour > 1 ? "s" : "")"
+        } else if minute > 0 && minute < 60 {
+            return "Il y a \(minute) minute\(minute > 1 ? "s" : "")"
         }
         return dateFormatter.string(from: publishedAt!)
     }

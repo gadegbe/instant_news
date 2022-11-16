@@ -5,9 +5,9 @@
 import UIKit
 
 class ArticlesListDataSource: NSObject, UITableViewDataSource {
-    private let vm: ArticlesListViewModel
+    private let vm: ArticlesListViewModel<ArticlesRestApi>
 
-    init(_ vm: ArticlesListViewModel) {
+    init(_ vm: ArticlesListViewModel<ArticlesRestApi>) {
         self.vm = vm
         super.init()
     }

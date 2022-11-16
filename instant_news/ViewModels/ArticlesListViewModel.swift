@@ -4,9 +4,9 @@
 
 import UIKit
 
-class ArticlesListViewModel: NSObject {
+class ArticlesListViewModel<T: ArticlesRestApiInterface>: NSObject {
 
-    private var newsApi: ArticlesRestApi!
+    private var newsApi: T!
 
     private(set) var articles: [Article]! {
         didSet {
@@ -31,7 +31,7 @@ class ArticlesListViewModel: NSObject {
 
     override init() {
         super.init()
-        newsApi = ArticlesRestApi()
+        newsApi = T.init()
         fetchArticles()
     }
 

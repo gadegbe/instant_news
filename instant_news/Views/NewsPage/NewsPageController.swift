@@ -7,7 +7,7 @@ import UIKit
 class NewsPageController: UIViewController, UISearchBarDelegate {
 
     let articlesViewModel = {
-        ArticlesListViewModel()
+        ArticlesListViewModel<ArticlesRestApi>()
     }()
 
     lazy var dataSource = {

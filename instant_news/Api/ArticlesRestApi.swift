@@ -4,7 +4,10 @@
 
 import Foundation
 
-class ArticlesRestApi: NSObject {
+class ArticlesRestApi: NSObject, ArticlesRestApiInterface {
+    required override init() {
+        super.init()
+    }
 
     func fetchArticles(query: String?, sortBy: String, completion: @escaping ([Article]) -> ()) {
         var sourcesURL = URL(string: "https://newsapi.org/v2/top-headlines?language=\(Config.language)&sortBy=\(sortBy)")!
