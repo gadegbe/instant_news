@@ -6,5 +6,5 @@ import Foundation
 
 protocol ArticlesRestApiInterface {
     init()
-    func fetchArticles(query: String?, sortBy: String, completion: @escaping ([Article]) -> ())
+    func fetchArticles(query: String?, sortBy: String, page: Int, completion: @escaping ([Article]) -> ())
 }

@@ -8,7 +8,7 @@ struct SortBy {
     let value, name: String
 
     static let sorts = [
-        SortBy(value: "relevancy", name: "Pertinance"),
+        SortBy(value: "relevancy", name: "Pertinence"),
         SortBy(value: "popularity", name: "Popularité"),
         SortBy(value: "publishedAt", name: "Date de publication"),
     ]

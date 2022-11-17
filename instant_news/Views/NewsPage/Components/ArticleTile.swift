@@ -9,7 +9,7 @@ class ArticleTile: UITableViewCell {
 
     lazy var leadingImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleToFill
+        image.contentMode = .scaleAspectFill
         // add radius to leading image
         image.clipsToBounds = true
         image.layer.masksToBounds = true

@@ -9,10 +9,10 @@ class ArticlesRestApi: NSObject, ArticlesRestApiInterface {
         super.init()
     }
 
-    func fetchArticles(query: String?, sortBy: String, completion: @escaping ([Article]) -> ()) {
+    func fetchArticles(query: String?, sortBy: String, page: Int, completion: @escaping ([Article]) -> ()) {
         var sourcesURL = URL(string: "https://newsapi.org/v2/top-headlines?language=\(Config.language)&sortBy=\(sortBy)")!
         if (query != nil && !query!.isEmpty) {
-            sourcesURL = URL(string: "https://newsapi.org/v2/everything?q=\(query!)&language=\(Config.language)&sortBy=\(sortBy)")!
+            sourcesURL = URL(string: "https://newsapi.org/v2/everything?q=\(query!)&language=\(Config.language)&sortBy=\(sortBy)&pageSize=\(Config.pageSize)&page=\(page)")!
         }
 
         var request = URLRequest(url: sourcesURL)

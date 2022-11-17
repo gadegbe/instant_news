@@ -4,11 +4,10 @@
 
 import UIKit
 
-class NewsPageController: UIViewController, UISearchBarDelegate {
+class NewsPageController: UIViewController, UIScrollViewDelegate, UISearchBarDelegate {
 
-    let articlesViewModel = {
-        ArticlesListViewModel<ArticlesRestApi>()
-    }()
+    let articlesViewModel =
+            ArticlesListViewModel<ArticlesRestApi>()
 
     lazy var dataSource = {
         ArticlesListDataSource(articlesViewModel)
@@ -48,6 +47,7 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
                 .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
         return button
     }()
 
@@ -122,8 +122,15 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
 
         articlesViewModel.reloadContent = { [self] in
             Task {
-                articlesListView.isHidden = articlesViewModel.articles!.isEmpty
+                articlesListView.isHidden = articlesViewModel.articles.isEmpty
                 emptyImage.isHidden = !articlesListView.isHidden
+                if articlesViewModel.query != nil && !articlesViewModel.query!.isEmpty {
+                    sortByButton.isHidden = false
+                    sortByButton.setTitle(articlesViewModel.selectOrder.name, for: .normal)
+                } else {
+                    sortByButton.isHidden = true
+
+                }
                 articlesListView.reloadData()
             }
         }
@@ -145,5 +152,4 @@ class NewsPageController: UIViewController, UISearchBarDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .default
     }
-
 }

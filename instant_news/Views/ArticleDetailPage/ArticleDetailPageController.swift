@@ -11,7 +11,7 @@ class ArticleDetailPageController: UIViewController {
     lazy var headerImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        // add radius to leading image
+        // add radius to header image
         image.clipsToBounds = true
         image.layer.masksToBounds = true
         image.layer.cornerRadius = 8
@@ -196,7 +196,6 @@ class ArticleDetailPageController: UIViewController {
             contentTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             contentTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             contentTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            contentTextView.heightAnchor.constraint(equalToConstant: 300),
 
             // add constraints to openOnWeb
             openOnWeb.leadingAnchor.constraint(equalTo: contentTextView.leadingAnchor),

@@ -23,4 +23,12 @@ class ArticlesListDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(ArticleDetailPageController(article: vm.articles[indexPath.row]), animated: true)
     }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let isReachingEnd = scrollView.contentOffset.y >= 0
+                && scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)
+        if isReachingEnd && !vm.isLoading {
+            vm.fetchArticles()
+        }
+    }
 }

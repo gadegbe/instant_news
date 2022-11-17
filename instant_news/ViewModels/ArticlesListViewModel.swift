@@ -8,7 +8,7 @@ class ArticlesListViewModel<T: ArticlesRestApiInterface>: NSObject {
 
     private var newsApi: T!
 
-    private(set) var articles: [Article]! {
+    private(set) var articles: [Article] = [Article]() {
         didSet {
             reloadContent()
         }
@@ -16,18 +16,31 @@ class ArticlesListViewModel<T: ArticlesRestApiInterface>: NSObject {
 
     var selectOrder: SortBy = SortBy.sorts.first! {
         didSet {
-            fetchArticles()
+            resetViewModel()
         }
     }
 
     var query: String? {
         didSet {
-            fetchArticles()
+            resetViewModel()
         }
+    }
+
+    private func resetViewModel() {
+        articles.removeAll()
+        stopFetch = false
+        currentPage = 1
+        fetchArticles()
     }
 
     var reloadContent: () -> () = {
     }
+
+    var currentPage: Int = 1;
+
+    var stopFetch: Bool = false;
+
+    var isLoading: Bool = false;
 
     override init() {
         super.init()
@@ -36,8 +49,21 @@ class ArticlesListViewModel<T: ArticlesRestApiInterface>: NSObject {
     }
 
     func fetchArticles() {
-        newsApi.fetchArticles(query: query, sortBy: selectOrder.value, completion: { (articles) in
-            self.articles = articles
-        })
+        if (!stopFetch) {
+            isLoading = true
+            newsApi.fetchArticles(query: query, sortBy: selectOrder.value, page: currentPage, completion: { [self] (articles) in
+                if (articles.isEmpty) {
+                    stopFetch = true
+                } else {
+                    self.articles += articles
+                    if query == nil || query!.isEmpty {
+                        stopFetch = true
+                    } else {
+                        currentPage += 1
+                    }
+                }
+                isLoading = false
+            })
+        }
     }
 }

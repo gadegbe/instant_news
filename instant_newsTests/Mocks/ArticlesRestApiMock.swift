@@ -9,7 +9,7 @@ class ArticlesRestApiMock: NSObject, ArticlesRestApiInterface {
         super.init()
     }
 
-    func fetchArticles(query: String?, sortBy: String, completion: @escaping ([Article]) -> ()) {
+    func fetchArticles(query: String?, sortBy: String, page: Int, completion: @escaping ([Article]) -> ()) {
         if (query == nil || query!.isEmpty) {
             completion([
                 Article(source: nil, author: "", title: "", description: "", url: "", urlToImage: "", content: "", publishedAt: nil),
