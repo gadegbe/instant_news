@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6BEFB2A3291D794800B50F1E"
+               BuildableName = "instant_news.app"
+               BlueprintName = "instant_news"
+               ReferencedContainer = "container:instant_news.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
+      allowLocationSimulation = "YES">
+      <PathRunnable
+         FilePath = "/Users/gadegbe/Library/Caches/JetBrains/AppCode2022.2/DerivedData/instant_news-gqckiscyggeuoufyejrujazcaofp/Build/Products/Debug-iphonesimulator/instant_news.app">
+      </PathRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "info"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
+   </LaunchAction>
+</Scheme>
