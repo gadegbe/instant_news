@@ -13,41 +13,40 @@ News page is the home page of the page and will allow user to
     - If no query term was taped, the app load the top-headlines of the API
     - If the user scroll and reach the end of the table, the app launch an autoscroll mechanism to load more data
 
-![](./images/news_page_wireframe.png)
+<img src="./images/news_page_wireframe.png" width="200"/>
 
 When user click on a specific article the app open the article details
 
 ## Article details page
 
-![](./images/article_details_wireframe.png)
+<img src="./images/article_details_wireframe.png" width="200"/>
 
 # Project architecture & structure
 
-![](./images/structure.png)
+<img src="./images/structure.png" width="200"/>
 
 # Screenshots
 
 ### Hot headline when the app opened and idle
 
-![](./images/hot_headlines.png)
+<img src="./images/hot_headlines.png" width="200"/>
 
 ### Search for a specific term
 
-![](./images/specific_article_search.png)
+<img src="./images/specific_article_search.png" width="200"/>
 
 ### Use the sort by modal
 
-![](./images/sortby_modal.png)
+<img src="./images/sortby_modal.png" width="200"/>
 
 ### Search for a specific term and empty result
 
-![](./images/empty_result.png)
+<img src="./images/empty_result.png" width="200"/>
 
 ### Open article details
 
-![](./images/article_details.png)
+<img src="./images/article_details.png" width="200"/>
 
 ### Share the opened article
 
-![](./images/share_the_article.png)
-
+<img src="./images/share_the_article.png" width="200"/>
