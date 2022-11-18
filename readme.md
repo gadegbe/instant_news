@@ -2,7 +2,7 @@
 
 ## News page
 
-News page is the home page of the page and will allow user to
+News page is the home page of the page and will allow user to:
 
 - Search a specific terme in the news
 - Sort the results if there are some by
@@ -29,7 +29,8 @@ When user click on a specific article the app open the article details
 
 - ### Don't use SwiftUI with MVVM
 
-I would like to use SwiftUI because is modern of offer a more intuitive approach by introducing declarative programming,
+I would like to use SwiftUI because is modern and offer a more intuitive approach by introducing declarative
+programming,
 but as a constraint of the specifications was to use MVVM, we can't use it.
 Use SwiftUI with a view model is over-engineering as the data binding was already declared in the views and SwiftUI
 takes the responsability to update the UI when a event is triggered, use of a view model or a controller is very useless

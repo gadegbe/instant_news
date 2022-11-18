@@ -12,13 +12,12 @@ class SortByModal: UIAlertController {
 
         SortBy.sorts.forEach({ sortBy in
             let element = UIAlertAction(title: sortBy.name, style: .default, handler: { [self] (action) -> Void in
+                // change the order of article
                 vm?.selectOrder = sortBy
             })
             addAction(element)
         })
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-            print("Cancel button tapped")
-        })
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel)
 
         addAction(cancelButton)
     }

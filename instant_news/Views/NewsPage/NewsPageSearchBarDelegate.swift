@@ -15,6 +15,7 @@ class NewsPageSearchBarDelegate: NSObject, UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String) {
+        // make the search and debounce the api call to avoid the overload of the API
         debounce_search?.invalidate()
         debounce_search = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [self] _ in
             vm.query = textSearched

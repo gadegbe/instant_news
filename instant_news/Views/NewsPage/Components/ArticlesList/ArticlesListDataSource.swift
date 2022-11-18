@@ -17,14 +17,11 @@ class ArticlesListDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTile", for: indexPath) as? ArticleTile else {
             fatalError("ArticleCard is not defined!")
         }
-
         let article = vm.articles[indexPath.row]
         cell.configure(article)
-
         return cell
     }
 }
