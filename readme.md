@@ -13,7 +13,7 @@ News page is the home page of the page and will allow user to
     - If no query term was taped, the app load the top-headlines of the API
     - If the user scroll and reach the end of the table, the app launch an autoscroll mechanism to load more data
 
-<img src="./images/news_page_wireframe.png" width="200"/>
+<img src="./images/news_page_wireframe.png" width="200" />
 
 When user click on a specific article the app open the article details
 
