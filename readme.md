@@ -49,5 +49,5 @@ When user click on a specific article the app open the article details
 
 ### Share the opened article
 
-![](./images/share the article.png)
+![](./images/share_the_article.png)
 

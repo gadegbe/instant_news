@@ -5,16 +5,7 @@
 import UIKit
 
 class SortByModal: UIAlertController {
-    private var vm: ArticlesListViewModel<ArticlesRestApi>?
-
-    init(vm: ArticlesListViewModel<ArticlesRestApi>) {
-        super.init(nibName: nil, bundle: nil)
-        self.vm = vm
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
+    var vm: ArticlesListViewModel<ArticlesRestApi>?
 
     override func viewDidLoad() {
         title = "Trier"
